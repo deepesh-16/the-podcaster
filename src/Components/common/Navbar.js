@@ -1,20 +1,27 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import Home from '../pages/Home'
+import ResumeWatching from '../pages/ResumeWatching';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Home', href: '/', current: true },
+  { name: 'Resume watching', href: '/resume-watching', current: false },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const isLoggedIn = false;
+
 export default function Example() {
   return (
+    <div>
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
@@ -62,6 +69,7 @@ export default function Example() {
                   </div>
                 </div>
               </div>
+              { isLoggedIn &&
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
@@ -130,6 +138,23 @@ export default function Example() {
                   </Transition>
                 </Menu>
               </div>
+              }
+              {
+                !isLoggedIn &&
+                <div className="absolute text-white inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <a
+                        key='login/signup'
+                        href='/login'
+                        className={classNames(
+                          'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
+                        )}
+                        // aria-current={item.current ? 'page' : undefined}
+                      >
+                        Login/Signup
+                      </a>
+                </div>
+              }
             </div>
           </div>
 
@@ -154,5 +179,12 @@ export default function Example() {
         </>
       )}
     </Disclosure>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/resume-watching" element={<ResumeWatching />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<Signup />} />
+    </Routes>
+    </div>
   )
 }
