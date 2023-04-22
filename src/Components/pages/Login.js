@@ -3,8 +3,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { userLogin } from '../../Slices/userSlice'
+import { useEffect } from "react";
 
 function Login() {
     const {
@@ -12,6 +13,10 @@ function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
+
+    let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector(
+        (state) => state.user
+      );
 
     //get user state from redux
     // let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector((state) => state.user);
@@ -22,6 +27,16 @@ function Login() {
         // console.log("OK OK")
         dispatch(userLogin(userCredentialsObject));
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+          navigate("/Homepage");
+        }
+        if(isError){
+          alert("Invalid Username or Password !!!");
+        }
+      }, [isSuccess, isError]);
+
     return (
     <div className="">
         <div className="card cols col-lg-5 col-md-8 col-10 mx-auto m-5">

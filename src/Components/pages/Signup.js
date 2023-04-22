@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import {useSelector} from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
     const {register,handleSubmit,formState:{errors}} = useForm()
@@ -61,6 +62,7 @@ function Signup() {
                         </Button>
 
                     </Form>
+                    <h1 className='h1-e'>Already registered <Link to={{pathname : '/Login'}}>Login?</Link></h1>
                 </div>
             </div>
         </div>
