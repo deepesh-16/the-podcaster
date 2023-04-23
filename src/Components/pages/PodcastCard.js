@@ -75,7 +75,6 @@ function PodcastCard(props) {
                                 ref={videoRef}
                                 controls
                                 onTimeUpdate={handleTimeUpdateVideo}
-                                //   onLoadedMetadata={handleLoadedMetadata}
                                 src={props.file}
                                 type = "video/mp4"
                                 >

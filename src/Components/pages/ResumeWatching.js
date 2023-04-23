@@ -30,15 +30,6 @@ function ResumeWatching() {
       {/* <button onClick={handleClick}>
         Hello
       </button> */}
-      {/* <audio
-        ref={audioRef}
-        controls
-        onTimeUpdate={handleTimeUpdateAudio}
-        src={audiofile}
-      >
-        Your browser does not support the audio tag.
-      </audio>
-      <p>Current time: {currentTime.toFixed(2)}</p> */}
       { podcastDetails.length > 0 && <AllPodcasts podcastDetails={podcastDetails}/>}
     </div>
   )
