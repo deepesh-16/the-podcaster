@@ -3,71 +3,69 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { userLogin } from '../../Slices/userSlice'
 import { useEffect } from "react";
 
 function Login() {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-    // eslint-disable-next-line
-    let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector(
-        (state) => state.user
-      );
+const {
+register,
+handleSubmit,
+formState: { errors },
+} = useForm();
 
-    //get user state from redux
-    // let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector((state) => state.user);
-    let dispatch = useDispatch();
+let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector(
+(state) => state.user
+);
 
-    const navigate = useNavigate();
-    const onFormSubmit = (userCredentialsObject) => {
-        // console.log("OK OK")
-        dispatch(userLogin(userCredentialsObject));
-    };
-    useEffect(() => {
-        if (isSuccess) {
-          navigate("/home");
-        }
-        if(isError){
-          alert("Invalid Username or Password !!!");
-        }
-        // eslint-disable-next-line
-      }, [isSuccess, isError]);
+let dispatch = useDispatch();
 
-    return (
-    <div className="">
-        <div className="card cols col-lg-5 col-md-8 col-10 mx-auto m-5">
-            <div className="container mb-2">
-                <p className="display-6 text-center">Login</p>
-                <Form onSubmit={handleSubmit(onFormSubmit)}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" {...register("email",{required:true})}/>
-                        {errors.email && (<p className="text-danger">*Required field</p>)}
-                    </Form.Group>
+const navigate = useNavigate();
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" {...register("password", { required: true })}/>
-                        {errors.password?.type==='required'&& <p className="text-danger">* Required field</p>}
-                    </Form.Group>
+const onFormSubmit = (userCredentialsObject) => {
+dispatch(userLogin(userCredentialsObject));
+};
 
-                    <Button style={{ backgroundColor: "black", color:"white"}} variant="primary" type="submit" className="d-block mx-auto">
-                        Login
-                    </Button>
+useEffect(() => {
+if (isSuccess) {
+navigate("/home");
+}
+if(isError){
+alert("Invalid Username or Password !!!");
+}
+}, [isSuccess, isError]);
 
-                    <Form.Label className=" d-flex align-items-center">
-                        Don't have an account? 
-                        <Button onClick={()=>navigate('/sign-up')} variant="link">Signup</Button>
-                    </Form.Label>
-                </Form>
-            </div>
-        </div>
-    </div>
-    )
+return (
+<div className="flex justify-center h-screen pt-16 bg-gray-800">
+<div className="card max-w-md w-full ">
+<div className="text-3xl font-bold text-center mb-5 text-white">Login</div>
+<Form onSubmit={handleSubmit(onFormSubmit)}>
+<Form.Group className="mb-6" controlId="formBasicEmail">
+<Form.Label className="block text-white font-bold mb-2">Email address</Form.Label>
+<Form.Control type="email" placeholder="Enter email" {...register("email",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+{errors.email && (<p className="text-red-500 text-xs italic">*Required field</p>)}
+</Form.Group>
+
+<Form.Group className="mb-6" controlId="formBasicPassword">
+<Form.Label className="block text-white font-bold mb-2">Password</Form.Label>
+<Form.Control type="password" placeholder="Password" {...register("password", { required: true })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+{errors.password?.type==='required'&& <p className="text-red-500 text-xs italic">* Required field</p>}
+</Form.Group>
+
+<Button style={{ color:"#fff"}} variant="primary" type="submit" className="w-full py-2 rounded-md font-bold bg-cyan-600 text-white focus:outline-none focus:shadow-outline hover:bg-blue-800">
+Login
+</Button>
+
+<Form.Label className="block mt-4">
+Don't have an account?
+<Button onClick={()=>navigate('/sign-up')} variant="link" className="text-indigo-500 hover:bg-transparent">
+Signup
+</Button>
+</Form.Label>
+</Form>
+</div>
+</div>
+)
 }
 
 export default Login
