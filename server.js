@@ -15,18 +15,20 @@ mclient.connect(DBurl)
 
     let dbObj=client.db("thePodcaster");
     let userCollectionObject=dbObj.collection("usercollection");
+    let favoriteCollectionObject=dbObj.collection("favoritecollection");
 
     app.set("userCollectionObject",userCollectionObject);
+    app.set("favoriteCollectionObject",favoriteCollectionObject);
 
     console.log("DB connection success")
 })
 .catch(err=>console.log('Error in DB connection ',err))
 
-
-
 const userApp = require("./APIs/userApi");
+const favoriteApp = require("./APIs/favoriteAPI");
 
 app.use("/user-api", userApp);
+app.use("/favorite-api", favoriteApp);
 
 app.use('*',(request, response) => {
     response.sendFile(path.join(__dirname,'./build/index.html'));
