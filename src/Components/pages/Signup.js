@@ -63,7 +63,7 @@ function Signup() {
                         </Button>
 
                     
-                    <Form.Label className='block mt-4'>
+                    <Form.Label className='block mt-4 text-white'>
                       Already registered?
                       <Button onClick={()=> navigate('/Login')}  variant="link" className="text-indigo-500 hover:bg-transparent">
                         Login

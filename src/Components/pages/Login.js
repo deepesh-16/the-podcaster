@@ -56,7 +56,7 @@ return (
 Login
 </Button>
 
-<Form.Label className="block mt-4">
+<Form.Label className="block mt-4 text-white">
 Don't have an account?
 <Button onClick={()=>navigate('/sign-up')} variant="link" className="text-indigo-500 hover:bg-transparent">
 Signup

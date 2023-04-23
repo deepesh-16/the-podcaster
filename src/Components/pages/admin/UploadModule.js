@@ -56,24 +56,24 @@ function UploadModule() {
         
     }
   return (
-    <div className='bg-gray-800 h-screen'>
-        <h1 className='block italic text-4xl font-bold text-white text-center mb-12 pt-8'>Upload Podcasts:</h1>
-        <div className='text-white flex justify-center'>
-        <Form onSubmit = {handleSubmit(onFormSubmit)} className='font-semibold text-lg'>
+    <div className='flex  justify-center h-screen bg-gray-800'>
+        <div className='card max-w-md w-full pt-8'>
+        <h1 className='text-3xl font-bold text-center mb-5 text-white' >Upload Podcasts:</h1>
+        <Form onSubmit = {handleSubmit(onFormSubmit)}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Podcast Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Posdast Name" {...register("podname",{required:true})}/>
+                            <Form.Label className='block text-white font-bold mb-2'>Podcast Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Podcast Name" {...register("podname",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.podname && (<p className="text-danger">*Required field</p>)}
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Posdcast Description</Form.Label>
-                            <Form.Control type="text" placeholder="Description" {...register("poddesciption",{required:true})} />
+                            <Form.Label className='block text-white font-bold mb-2'>Posdcast Description</Form.Label>
+                            <Form.Control type="text" placeholder="Description" {...register("poddesciption",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.poddescriptions?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
     
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Select Form Type</Form.Label>
-                            <Form.Select className=" text-black italic" placeholder="Type" {...register("type",{required:true})}>
+                        <Form.Label className='block text-white font-bold mb-2'>Select Form Type</Form.Label>
+                            <Form.Select placeholder="Type" {...register("type",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="video">Video</option>
                                 <option value="audio">Audio</option>
                             </Form.Select>
@@ -81,24 +81,24 @@ function UploadModule() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Speaker</Form.Label>
-                            <Form.Control type="text" className=" text-black italic " placeholder="Speaker" {...register("speaker",{required:true})}/>
+                            <Form.Label className='block text-white font-bold mb-2'>Speaker</Form.Label>
+                            <Form.Control type="text"placeholder="Speaker" {...register("speaker",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.speaker?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
 
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Upload Thumbnail</Form.Label>
-                            <Form.Control type="file" placeholder="Thumbnail" {...register("thumbnail",{required:true})}/>
+                            <Form.Label className='block text-white font-bold mb-2'>Upload Thumbnail</Form.Label>
+                            <Form.Control type="file" placeholder="Thumbnail" {...register("thumbnail",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.thumbnail?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
 
                         <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Upload File</Form.Label>
-                            <Form.Control type="file" placeholder="File" {...register("file",{required:true})}/>
+                            <Form.Label className='block text-white font-bold mb-2'>Upload File</Form.Label>
+                            <Form.Control type="file" placeholder="File" {...register("file",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.file?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
 
-                        <Button style={{ backgroundColor: "rgb(1, 95, 130)"}} variant="primary" type="submit" className="d-block mx-auto">
+                        <Button style={{  color: '#fff'}} variant="primary" type="submit" className="w-full py-2 rounded-md font-bold bg-cyan-600 text-white focus:outline-none focus:shadow-outline hover:bg-blue-800">
                             Upload
                         </Button>
 
