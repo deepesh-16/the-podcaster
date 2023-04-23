@@ -13,7 +13,9 @@ function UploadModule() {
     const [data,setData]=useState()
     const onFormSubmit = (user) => {
         let podData = Object.assign(user,userObj);
+        console.log(podData)
         const file=podData.file[0]
+        const thumbnail=podData.thumbnail[0]
         const data=new FormData()
         data.append("file",file)
         data.append('upload_preset',"the-podcasters")
@@ -24,25 +26,38 @@ function UploadModule() {
         })
         .then((res)=>res.json())
         .then((data)=>{
-
-        console.log(userObj)
-        const podcastData={
-        "podname":podData.podname,
-        "poddesciption":podData.poddesciption,
-        "type":podData.type,
-        "speaker":podData.speaker,
-        "file":data.secure_url,
-        }
+            const thumbdata=new FormData()
+            thumbdata.append("file",thumbnail)
+            thumbdata.append('upload_preset',"the-podcasters")
+            thumbdata.append('cloud_name',"dndv7br0m")
+            fetch("https://api.cloudinary.com/v1_1/dndv7br0m/image/upload",{
+                method:"post",
+                body:thumbdata
+            })
+            .then((res1)=>res1.json())
+            .then((data1)=>{
+            console.log(userObj)
+            const podcastData={
+            "podname":podData.podname,
+            "poddesciption":podData.poddesciption,
+            "type":podData.type,
+            "speaker":podData.speaker,
+            "thumbnail":data1.secure_url,
+            "file":data.secure_url,
+            "views":0,
+            }
         axios.post('http://localhost:4000/podcast-api/create-podcast',podcastData)
         .then(response => {
             console.log(response)
         })
         .catch(error => alert(error))
+    })
     }).catch((err)=>{console.log(err)})
         
     }
   return (
-    <div>
+    <div className='bg-gray-800 h-full'>
+        <div className=''>
         <Form onSubmit = {handleSubmit(onFormSubmit)}>
                         <Form.Group className="mb-3">
                             <Form.Label>Podcast Name</Form.Label>
@@ -71,16 +86,23 @@ function UploadModule() {
                         </Form.Group>
 
                         <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Upload Thumbnail</Form.Label>
+                            <Form.Control type="file" placeholder="Thumbnail" {...register("thumbnail",{required:true})}/>
+                            {errors.thumbnail?.type==='required'&& <p className="text-danger">* Required field</p>}
+                        </Form.Group>
+
+                        <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Upload File</Form.Label>
                             <Form.Control type="file" placeholder="File" {...register("file",{required:true})}/>
                             {errors.file?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
 
                         <Button style={{ backgroundColor: "rgb(1, 95, 130)"}} variant="primary" type="submit" className="d-block mx-auto">
-                            Signup
+                            Upload
                         </Button>
 
                     </Form>
+        </div>
     </div>
   )
 }
