@@ -1,21 +1,19 @@
-import React  from 'react'
+import React ,{useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import {useForm} from 'react-hook-form'
-import axios from 'axios'
 import {useSelector} from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function UploadModule() {
 
     const {register,handleSubmit,formState:{errors}} = useForm()
     let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector((state) => state.user);
 
-
+    const [data,setData]=useState()
     const onFormSubmit = (user) => {
-        let userData = Object.assign(user,userObj);
-        const file=userData.file[0]
-        console.log(file)
+        let podData = Object.assign(user,userObj);
+        const file=podData.file[0]
         const data=new FormData()
         data.append("file",file)
         data.append('upload_preset',"the-podcasters")
@@ -25,12 +23,23 @@ function UploadModule() {
             body:data
         })
         .then((res)=>res.json())
-        .then((data)=>{console.log(data)}).catch((err)=>{console.log(err)})
-        // axios.post('http://localhost:4000/user-api/create-user',userData)
-        // .then(response => {
-        //     console.log(response)
-        // })
-        // .catch(error => alert(error))
+        .then((data)=>{
+
+        console.log(userObj)
+        const podcastData={
+        "podname":podData.podname,
+        "poddesciption":podData.poddesciption,
+        "type":podData.type,
+        "speaker":podData.speaker,
+        "file":data.secure_url,
+        }
+        axios.post('http://localhost:4000/podcast-api/create-podcast',podcastData)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => alert(error))
+    }).catch((err)=>{console.log(err)})
+        
     }
   return (
     <div>

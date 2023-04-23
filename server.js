@@ -16,9 +16,11 @@ mclient.connect(DBurl)
     let dbObj=client.db("thePodcaster");
     let userCollectionObject=dbObj.collection("usercollection");
     let favoriteCollectionObject=dbObj.collection("favoritecollection");
+    let podcastCollectionObject=dbObj.collection("podcastcollection");
 
     app.set("userCollectionObject",userCollectionObject);
     app.set("favoriteCollectionObject",favoriteCollectionObject);
+    app.set("podcastCollectionObject",podcastCollectionObject);
 
     console.log("DB connection success")
 })
@@ -26,9 +28,11 @@ mclient.connect(DBurl)
 
 const userApp = require("./APIs/userApi");
 const favoriteApp = require("./APIs/favoriteAPI");
+const podApp=require("./APIs/podcastAPI");
 
 app.use("/user-api", userApp);
 app.use("/favorite-api", favoriteApp);
+app.use('/podcast-api',podApp);
 
 app.use('*',(request, response) => {
     response.sendFile(path.join(__dirname,'./build/index.html'));
