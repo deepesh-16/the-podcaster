@@ -1,8 +1,10 @@
 import React from 'react'
-
+import UploadModule from './admin/UploadModule'
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <UploadModule/>
+    </div>
   )
 }
 
