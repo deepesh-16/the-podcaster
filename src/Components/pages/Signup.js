@@ -16,7 +16,7 @@ function Signup() {
         if(userObj.email != null) staffStatus = true;
         else staffStatus = false;
 
-        let staffObj = {
+        let staffObj = { 
             isStaff: staffStatus
         }
         let userData = Object.assign(user,staffObj);
