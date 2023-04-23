@@ -13,7 +13,7 @@ function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    // eslint-disable-next-line
     let { userObj, isError, isLoading, isSuccess, errMsg } = useSelector(
         (state) => state.user
       );
@@ -27,14 +27,14 @@ function Login() {
         // console.log("OK OK")
         dispatch(userLogin(userCredentialsObject));
     };
-
     useEffect(() => {
         if (isSuccess) {
-          navigate("/Homepage");
+          navigate("/home");
         }
         if(isError){
           alert("Invalid Username or Password !!!");
         }
+        // eslint-disable-next-line
       }, [isSuccess, isError]);
 
     return (
