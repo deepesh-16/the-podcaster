@@ -66,7 +66,7 @@ function UploadModule() {
                             {errors.podname && (<p className="text-red-800">*Required field</p>)}
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label className='block text-white font-bold mb-2'>Posdcast Description</Form.Label>
+                            <Form.Label className='block text-white font-bold mb-2'>Podcast Description</Form.Label>
                             <Form.Control type="text" placeholder="Description" {...register("poddescription",{required:true})} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                             {errors.poddescription && <p className="text-red-800">* Required field</p>}
                         </Form.Group>
