@@ -56,9 +56,10 @@ function UploadModule() {
         
     }
   return (
-    <div className='bg-gray-800 h-full'>
-        <div className=''>
-        <Form onSubmit = {handleSubmit(onFormSubmit)}>
+    <div className='bg-gray-800 h-screen'>
+        <h1 className='block italic text-4xl font-bold text-white text-center mb-12 pt-8'>Upload Podcasts:</h1>
+        <div className='text-white flex justify-center'>
+        <Form onSubmit = {handleSubmit(onFormSubmit)} className='font-semibold text-lg'>
                         <Form.Group className="mb-3">
                             <Form.Label>Podcast Name</Form.Label>
                             <Form.Control type="text" placeholder="Enter Posdast Name" {...register("podname",{required:true})}/>
@@ -71,8 +72,8 @@ function UploadModule() {
                         </Form.Group>
     
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Select  placeholder="Type" {...register("type",{required:true})}>
-                                <option>Select File Type</option>
+                        <Form.Label>Select Form Type</Form.Label>
+                            <Form.Select className=" text-black italic" placeholder="Type" {...register("type",{required:true})}>
                                 <option value="video">Video</option>
                                 <option value="audio">Audio</option>
                             </Form.Select>
@@ -81,7 +82,7 @@ function UploadModule() {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Speaker</Form.Label>
-                            <Form.Control type="text" placeholder="Speaker" {...register("speaker",{required:true})}/>
+                            <Form.Control type="text" className=" text-black italic " placeholder="Speaker" {...register("speaker",{required:true})}/>
                             {errors.speaker?.type==='required'&& <p className="text-danger">* Required field</p>}
                         </Form.Group>
 
